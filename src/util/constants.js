@@ -1,9 +1,9 @@
-export const COUNTRIES_SUPPORTED = [
-  { countryCode: 'gl', countryName: 'l - Global' },
+export const COUNTRY_LIST = [
+  { countryCode: 'gl', countryName: 'Global' },
   { countryCode: 'us', countryName: 'United States' },
   { countryCode: 'au', countryName: 'Australia' },
-  { countryCode: 'gb', countryName: 'nited Kingdom' },
-  { countryCode: 'ca', countryName: 'anada' },
+  { countryCode: 'gb', countryName: 'United Kingdom' },
+  { countryCode: 'ca', countryName: 'Canada' },
   { countryCode: 'in', countryName: 'India' },
   { countryCode: 'cn', countryName: 'China' },
   { countryCode: 'ar', countryName: 'Argentina' },
@@ -91,4 +91,9 @@ export const COUNTRIES_SUPPORTED = [
   { countryCode: 'zw', countryName: 'Zimbabwe' }
 ]
 
-export const STOCK_PER_PAGE = 12
+export const ORDER_BY_LIST = [
+  { field: 'market_cap', direction: 'desc', label: 'Market Cap - High to low' },
+  { field: 'market_cap', direction: 'asc', label: 'Market Cap - Low to high' }
+]
+
+export const STOCK_PER_PAGE = 20

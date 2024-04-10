@@ -8,5 +8,4 @@ type Meta = {
   return_7d: number
 }
 
-
-export default Meta
+export default Meta;

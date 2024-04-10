@@ -1,41 +1,51 @@
 import axios from 'axios'
 import { STOCK_PER_PAGE } from '../util/constants'
-import Stock from '../types/Stock'
-
-type GetStockProps = {
-  countryFilter: string,
-  orderBy: string,
-  orderDirection: string,
-  page: number,
-  callback: (stocks: Stock[]) => void
-}
+import OrderBy from '../types/OrderBy'
+import SearchResult from '../types/SearchResult'
 
 const API_URL = 'https://simplywall.st/api/grid/filter?include=grid,score'
 
-const formatRules = (props: GetStockProps) => {
-  const { countryFilter, orderBy, orderDirection } = props
+const formatRules = (
+  countryFilter: string,
+  orderBy: OrderBy,
+) => {
+  const { field, direction } = orderBy
   var rulesArray: ((string | boolean)[] | (string | (string | string[])[][])[])[] = [["primary_flag", "=", true], ["grid_visible_flag", "=", true], ["market_cap", "is_not_null"], ["is_fund", "=", false]]
 
   if (countryFilter) {
     rulesArray.push(["aor", [["country_name", "in", [countryFilter]]]])
   }
 
-  if (orderBy) {
-    rulesArray.push(["order_by", orderBy, orderDirection])
+  if (field) {
+    rulesArray.push(["order_by", field, direction])
   }
 
   return rulesArray
 }
 
-export const getStocks = async (props: GetStockProps) => {
-  const { page } = props
-  const rules = formatRules(props)
+export const getStocks = async (
+  countryFilter: string,
+  orderBy: OrderBy,
+  page: number,
+  callback: (apiResonse: SearchResult) => void,
+  errorCallback: () => void
+) => {
 
-  const payload = {
-    offset: page * STOCK_PER_PAGE,
-    size: STOCK_PER_PAGE,
-    rules
+  try {
+    const rules = formatRules(countryFilter, orderBy)
+    const offset = page === 1 ? 0 : (page - 1) * STOCK_PER_PAGE
+
+    const payload = {
+      size: STOCK_PER_PAGE,
+      offset,
+      rules
+    }
+
+    const response = await axios.post(API_URL, payload, { headers: { 'sws': 'fe-challenge' } })
+
+    callback(response.data)
+  } catch (error) {
+    console.log(error)
+    errorCallback()
   }
-
-
 }

@@ -1,4 +1,4 @@
-export type Grid = {
+type Grid = {
   year_founded: number;
   description: string;
   logo_url: string;
@@ -10,3 +10,5 @@ export type Grid = {
   dividend_yield: number;
   main_thumb: string;
 };
+
+export default Grid;

@@ -8,6 +8,7 @@ const StyledTile = styled.div`
   }
   .logoContainer {
     width: 100%;
+    height: 100%;
     position: sticky;
 
     img {
@@ -22,6 +23,7 @@ const StyledTile = styled.div`
 
     .stockName {
       font-weight: 600;
+      font-size: 1.2rem;
     }
 
     .stockBasicInfo {
@@ -30,6 +32,7 @@ const StyledTile = styled.div`
       position: relative;
       background-color: rgba(45, 45, 40, 0.65);
       backdrop-filter: blur(5px);
+      height: 100%;
     }
   }
 `

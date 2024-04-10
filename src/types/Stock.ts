@@ -1,7 +1,6 @@
-import { Grid } from "./Grid";
-import { Score } from "./Score";
+import Grid from "./Grid";
+import Score from "./Score";
 
-export const rootVar = "data"
 
 type Stock = {
   id: number;
@@ -18,8 +17,8 @@ type Stock = {
   primary_canonical_url: string;
   is_searchable: boolean;
   isin_symbol: string,
-  score: { [rootVar]: Score };
-  grid: { [rootVar]: Grid };
+  score: { data: Score };
+  grid: { data: Grid };
 }
 
 export default Stock;

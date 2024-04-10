@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Score } from '../types/Score'
+import Score from '../types/Score'
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -67,6 +67,7 @@ const Chart = (props: ChartProps) => {
               borderWidth: 0.4,
               radius: 5,
               tension: .2,
+              color: 'white'
 
             },
             point: {
@@ -76,13 +77,10 @@ const Chart = (props: ChartProps) => {
               hoverBorderWidth: 3,
             },
             label: {
-              color: 'black',
+              color: 'white',
             },
             legend: {
-              display: false,
-              labels: {
-                color: 'rgb(255, 99, 132)'
-              }
+              display: false
             }
           }
         },

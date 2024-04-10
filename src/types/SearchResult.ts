@@ -3,7 +3,7 @@ import Stock from "./Stock";
 
 type SearchResult = {
   data: Stock[],
-  meta: Meta
+  // meta: Meta,
 }
 
 export default SearchResult;

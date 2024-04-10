@@ -1,4 +1,4 @@
-export type Score = {
+type Score = {
   value: number;
   income: number;
   health: number;
@@ -9,3 +9,5 @@ export type Score = {
   total: number;
   sentence: string;
 };
+
+export default Score;
