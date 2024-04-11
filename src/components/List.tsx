@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from "react"
 import SearchResult from "../types/SearchResult"
 import Tile from "./Tile"
-import Stock from "../types/Stock"
 import StyledList from "./styles/StyledList.style"
 import { getStocks } from "../api/sws"
 import OrderBy from "../types/OrderBy"
-import Country from "../types/Country"
+import Stock from "../types/Stock"
 import Loader from "./Loader"
 import Filters from "./Filters"
+import { useSelector } from "react-redux"
+import { RootState } from "../state/store"
+import { Button } from "@mui/material"
 
 type ListProps = {
-  loading: boolean;
-  data: Stock[];
-  changePage: () => void;
+  getNextBatch: () => void;
 }
-
 const List = (props: ListProps) => {
-  const { loading, data, changePage } = props
-
+  const { data, loading } = useSelector((state: RootState) => state.stock) as { data: Stock[], loading: boolean | undefined }
+  const { getNextBatch } = props;
   useEffect(() => {
     let lastScrollY = 0; // Keep track of the previous scroll position
+
 
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
       const currentScrollY = scrollTop;
 
       // Check if scrolling down and close to the end
-      if (currentScrollY > lastScrollY && scrollTop + clientHeight >= scrollHeight - 30 && !loading
-      ) {
-        changePage();
+      if (currentScrollY > lastScrollY && scrollTop + clientHeight >= scrollHeight - 30 && !loading) {
+        getNextBatch();
       }
 
       lastScrollY = currentScrollY; // Update for the next comparison

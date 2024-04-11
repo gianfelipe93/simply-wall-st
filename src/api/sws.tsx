@@ -12,7 +12,7 @@ const formatRules = (
   const { field, direction } = orderBy
   var rulesArray: ((string | boolean)[] | (string | (string | string[])[][])[])[] = [["primary_flag", "=", true], ["grid_visible_flag", "=", true], ["market_cap", "is_not_null"], ["is_fund", "=", false]]
 
-  if (countryFilter) {
+  if (countryFilter && countryFilter !== 'gl') {
     rulesArray.push(["aor", [["country_name", "in", [countryFilter]]]])
   }
 
@@ -27,25 +27,17 @@ export const getStocks = async (
   countryFilter: string,
   orderBy: OrderBy,
   page: number,
-  callback: (apiResonse: SearchResult) => void,
-  errorCallback: () => void
 ) => {
+  const rules = formatRules(countryFilter, orderBy)
+  const offset = page === 1 ? 0 : (page - 1) * STOCK_PER_PAGE
 
-  try {
-    const rules = formatRules(countryFilter, orderBy)
-    const offset = page === 1 ? 0 : (page - 1) * STOCK_PER_PAGE
-
-    const payload = {
-      size: STOCK_PER_PAGE,
-      offset,
-      rules
-    }
-
-    const response = await axios.post(API_URL, payload, { headers: { 'sws': 'fe-challenge' } })
-
-    callback(response.data)
-  } catch (error) {
-    console.log(error)
-    errorCallback()
+  const payload = {
+    size: STOCK_PER_PAGE,
+    offset,
+    rules
   }
+
+  const response = await axios.post(API_URL, payload, { headers: { 'sws': 'fe-challenge' } })
+
+  return response.data
 }

@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Filters from './Filters'
 import List from './List'
 import StyledBody from './styles/StyledBody.style'
-import SearchResult from '../types/SearchResult'
 import Country from '../types/Country'
 import OrderBy from '../types/OrderBy'
-import { getStocks } from "../api/sws"
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../state/store'
+import { getStocksAsync, reset } from '../state/storeSlice'
+import { Button } from '@mui/material'
 
 const SEARCH_RESULT_INITIAL_STATE = {
   data: [],
@@ -25,37 +27,30 @@ const COUNTRY_INITIA_STATE = { countryCode: 'au', countryName: 'Australia' }
 const ORDER_BY_INITIAL_STATE = { field: 'market_cap', direction: 'desc', label: 'Market Cap - High to low' }
 
 const Body = () => {
-  const [apiRequest, setApiRequest] = useState<SearchResult>(SEARCH_RESULT_INITIAL_STATE)
   const [countryFilter, setCountryFilter] = useState<Country>(COUNTRY_INITIA_STATE)
   const [orderBy, setOrderBy] = useState<OrderBy>(ORDER_BY_INITIAL_STATE)
   const [page, setPage] = useState<number>(1)
-  const [loading, setLoading] = useState<boolean>(false)
+  const prevCountryFilter = useRef(countryFilter)
 
-  const { data } = apiRequest
-  const onRequestSuccess = (data: SearchResult) => {
-    setLoading(false)
-    setApiRequest({ data: [...apiRequest.data, ...data.data] })
-  }
-  const onRequestFailure = () => { setApiRequest({ ...apiRequest }) }
-
-  const fetchStocks = () => getStocks(countryFilter.countryCode, orderBy, page, onRequestSuccess, onRequestFailure)
+  const { loading } = useSelector((state: RootState) => state.stock) as { loading: boolean | undefined }
+  const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
-    console.log("page changed", page)
-    setLoading(true)
-    fetchStocks()
-  }, [page])
+    const countryFilterChanged = prevCountryFilter.current.countryCode !== countryFilter.countryCode
 
-  const nextPage = () => {
-    setPage(page + 1)
-  }
+    if (countryFilterChanged) {//if the country filter changed, reset the state
+      dispatch(reset())
+    }
+    dispatch(getStocksAsync({ countryFilter: countryFilter.countryCode, orderBy, page: countryFilterChanged ? 1 : page }))
+    prevCountryFilter.current = countryFilter
+  }, [page, countryFilter, orderBy.field])
 
+  const getNextBatch = () => setPage(prev => prev + 1)
 
-  console.log(page)
   return (
     <StyledBody>
       <Filters countryFilter={countryFilter} orderBy={orderBy} setCountryFilter={setCountryFilter} setOrderBy={setOrderBy} />
-      <List changePage={nextPage} loading={loading} data={data} />
+      <List getNextBatch={getNextBatch} />
     </StyledBody>
   )
 }

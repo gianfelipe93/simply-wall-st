@@ -26,6 +26,7 @@ const Filters = (props: FilterProps) => {
           getOptionLabel={(option) => option.countryName}
           isOptionEqualToValue={(option, value) => option.countryCode === value.countryCode}
           value={countryFilter}
+          disableClearable={true}
           renderInput={(params) => <TextField {...params} label="Filter by country" />}
           onChange={(event: any, option: Country | null) => {
             if (option) {
@@ -41,6 +42,7 @@ const Filters = (props: FilterProps) => {
           sx={{ width: 300 }}
           isOptionEqualToValue={(option, value) => option.field === value.field}
           getOptionLabel={(option) => option.label || ''}
+          disableClearable={true}
           renderInput={(params) => <TextField {...params} label="Order By" />}
           value={orderBy}
           onChange={(event: any, option: OrderBy | null) => {
