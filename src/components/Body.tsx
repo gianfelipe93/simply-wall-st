@@ -16,21 +16,48 @@ const Body = () => {
   const [countryFilter, setCountryFilter] = useState<Country>(COUNTRY_INITIA_STATE)
   const [orderBy, setOrderBy] = useState<OrderBy>(ORDER_BY_INITIAL_STATE)
   const [page, setPage] = useState<number>(1)
-  const prevCountryFilter = useRef(countryFilter)
+  const prevPage = useRef<number>(page)
 
   const dispatch = useDispatch<AppDispatch>()
 
+  // useEffect(() => {
+  //   const countryFilterChanged = prevCountryFilter.current.countryCode !== countryFilter.countryCode
+  //   const prevOrderByDirection = prevOrderByFilter.current.direction !== orderBy.direction
+
+  //   var nextPage = page // had to create this because the page state was not updating in the dispatch call
+
+  //   if (countryFilterChanged || prevOrderByDirection) {//if the country filter changed, reset the state and set page to 1
+  //     setPage(1)
+
+  //     nextPage = 1
+  //     prevCountryFilter.current = countryFilter
+  //     prevOrderByFilter.current = orderBy
+  //   }
+
+  //   dispatch(getStocksAsync({ countryFilter: countryFilter.countryCode, orderBy, page: nextPage }))
+  // }, [page, countryFilter, JSON.stringify(orderBy)])
+
   useEffect(() => {
-    const countryFilterChanged = prevCountryFilter.current.countryCode !== countryFilter.countryCode
+    dispatch(reset())
 
-    if (countryFilterChanged) {//if the country filter changed, reset the state
-      dispatch(reset())
+    if (page === 1) {
+      dispatch(getStocksAsync({ countryFilter: countryFilter.countryCode, orderBy, page }))
+    } else {
+      setPage(1)
     }
-    dispatch(getStocksAsync({ countryFilter: countryFilter.countryCode, orderBy, page: countryFilterChanged ? 1 : page }))
-    prevCountryFilter.current = countryFilter
-  }, [page, countryFilter, orderBy.field])
+  }, [countryFilter, JSON.stringify(orderBy)])
 
-  const getNextBatch = () => setPage(prev => prev + 1)
+  useEffect(() => {
+    if (prevPage.current !== page) {
+      dispatch(getStocksAsync({ countryFilter: countryFilter.countryCode, orderBy, page }))
+    }
+
+    prevPage.current = page
+  }, [page])
+
+  const getNextBatch = () => {
+    setPage((prev: number) => prev + 1)
+  }
 
   return (
     <StyledBody>

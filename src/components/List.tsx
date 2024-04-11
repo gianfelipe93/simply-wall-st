@@ -12,16 +12,38 @@ type ListProps = {
 const List = (props: ListProps) => {
   const { data, loading } = useSelector((state: RootState) => state.stock) as { data: Stock[], loading: boolean | undefined }
   const { getNextBatch } = props;
+
+  const findDuplicates = (arr: any) => {
+    const idSet = new Set();
+    const duplicates = [];
+
+    for (const obj of arr) {
+      if (idSet.has(obj.id)) {
+        duplicates.push(obj);
+      } else {
+        idSet.add(obj.id);
+      }
+    }
+
+    return duplicates;
+  };
+
+  const result = findDuplicates(data);
+
+  if (result.length > 0) {
+    console.log({ result })
+    alert('Duplicate stock found in the list')
+  }
+
   useEffect(() => {
     let lastScrollY = 0; // Keep track of the previous scroll position
-
 
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
       const currentScrollY = scrollTop;
 
       // Check if scrolling down and close to the end
-      if (currentScrollY > lastScrollY && scrollTop + clientHeight >= scrollHeight - 30 && !loading) {
+      if (currentScrollY > lastScrollY && scrollTop + clientHeight >= scrollHeight - 20 && !loading) {
         getNextBatch();
       }
 
