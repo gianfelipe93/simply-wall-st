@@ -6,6 +6,11 @@ const StyledFilter = styled.div`
         justify-content: space-between;
         padding: 1rem 0px;
 
+        .filters {
+          display: flex;
+          column-gap: 1rem;
+        }
+
         .MuiOutlinedInput-root {
           background-color: #575853;
         }

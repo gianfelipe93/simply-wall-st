@@ -96,4 +96,13 @@ export const ORDER_BY_LIST = [
   { field: 'market_cap', direction: 'asc', label: 'Market Cap - Low to high' }
 ]
 
+export const SUPPORTED_LANGUAGES = [
+  { code: 'en', name: 'English - Australia' },
+  { code: 'br', name: 'Português - Brazil' }
+]
+
 export const STOCK_PER_PAGE = 20
+
+export const FILTER_BY_COUNTRY = "FILTER_BY_COUNTRY";
+export const ORDER_BY = "ORDER_BY";
+export const SELECT_LANGUAGE = "SELECT_LANGUAGE";
