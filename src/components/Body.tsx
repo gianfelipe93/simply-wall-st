@@ -28,7 +28,7 @@ const Body = () => {
     } else {
       setPage(1)
     }
-  }, [countryFilter, JSON.stringify(orderBy)])
+  }, [countryFilter, orderBy.direction])
 
   useEffect(() => {
     if (prevPage.current !== page) {

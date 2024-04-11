@@ -1,8 +1,37 @@
-# Getting Started with Create React App
+# Welcome
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the take-home test for Simply Wall St. 
 
-## Available Scripts
+I have created a simple page that lists stocks by country and allows ascending and descending sort by market cap.
+
+## Considerations
+
+- Style: I created most of the style using "styled components" because I am familiar with it and it's pretty straightforward. Additionally, I used material UI to create the dropdowns because it's also an easy integration and works well.
+- Pagination: I implemented infinite scroll pagination because it gives a smooth experience to the client as they go through the stocks.
+- Components:
+  - Landing Page: A initial component that sets basic style for the app and sets the basic structure of the application.
+  - Header: It is the header.
+  - Body: The main component in the app. It is responsible for managing the filters and pages (from the pagination) and it also fires the search.
+  - Filters: This component has 3 dropdows:
+    - Country Filter: Allows user to select what country we show stocks from
+    - Order by dropdown: Change the order of the list
+    - Select language dropdown: Allows user to change the app language. I used i18n to setup basic translation, when you change the country in that dropdown it will change the placeholder for the dropdowns above. Example: Filter by country -> Filtrar por país. It is a small change but shows that I set it up and understood the concept.
+    - Tile: The tile component will show stock information like name, unique code and snowflake chart
+    - Chart: Renders the snowflake chart. I created an average score value and used it to show stocks that go from light/shiny green if score is 6 all the way down to blood red if the score is 0. (this one was nice to implement)
+- State management: I setup Redux as state management tool. It is one of the most famous state management frameworks and it makes the data flow easily throw the application.
+- Types:
+  - Country
+  - Grid
+  - Meta
+  - OrderBy
+  - Score
+  - SearchResults
+  - Stock
+
+
+## See instructions below to run the app:
+
+Or you can access it here: 
 
 In the project directory, you can run:
 
@@ -11,36 +40,6 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Launches the test runner in the interactive watch mode.
