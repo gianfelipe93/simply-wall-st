@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from "react"
-import SearchResult from "../types/SearchResult"
+import React, { useEffect } from "react"
 import Tile from "./Tile"
 import StyledList from "./styles/StyledList.style"
-import { getStocks } from "../api/sws"
-import OrderBy from "../types/OrderBy"
 import Stock from "../types/Stock"
 import Loader from "./Loader"
-import Filters from "./Filters"
 import { useSelector } from "react-redux"
 import { RootState } from "../state/store"
-import { Button } from "@mui/material"
 
 type ListProps = {
   getNextBatch: () => void;

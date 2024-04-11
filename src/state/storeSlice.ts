@@ -2,7 +2,6 @@ import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import SearchResult from "../types/SearchResult";
 import { getStocks } from "../api/sws";
 import OrderBy from "../types/OrderBy";
-import Stock from "../types/Stock";
 
 type SearchFilterProps = {
   countryFilter: string,

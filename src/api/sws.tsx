@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { STOCK_PER_PAGE } from '../util/constants'
 import OrderBy from '../types/OrderBy'
-import SearchResult from '../types/SearchResult'
 
 const API_URL = 'https://simplywall.st/api/grid/filter?include=grid,score'
 

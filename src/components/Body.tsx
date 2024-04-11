@@ -4,23 +4,9 @@ import List from './List'
 import StyledBody from './styles/StyledBody.style'
 import Country from '../types/Country'
 import OrderBy from '../types/OrderBy'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../state/store'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../state/store'
 import { getStocksAsync, reset } from '../state/storeSlice'
-import { Button } from '@mui/material'
-
-const SEARCH_RESULT_INITIAL_STATE = {
-  data: [],
-  meta: {
-    total_records: 0,
-    real_total_records: 0,
-    state: 'read',
-    noResultIfLimit: false,
-    pe: 0,
-    return_1yr_abs: 0,
-    return_7d: 0
-  }
-}
 
 const COUNTRY_INITIA_STATE = { countryCode: 'au', countryName: 'Australia' }
 
@@ -32,7 +18,6 @@ const Body = () => {
   const [page, setPage] = useState<number>(1)
   const prevCountryFilter = useRef(countryFilter)
 
-  const { loading } = useSelector((state: RootState) => state.stock) as { loading: boolean | undefined }
   const dispatch = useDispatch<AppDispatch>()
 
   useEffect(() => {
