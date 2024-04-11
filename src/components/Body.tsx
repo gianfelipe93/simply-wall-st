@@ -20,23 +20,6 @@ const Body = () => {
 
   const dispatch = useDispatch<AppDispatch>()
 
-  // useEffect(() => {
-  //   const countryFilterChanged = prevCountryFilter.current.countryCode !== countryFilter.countryCode
-  //   const prevOrderByDirection = prevOrderByFilter.current.direction !== orderBy.direction
-
-  //   var nextPage = page // had to create this because the page state was not updating in the dispatch call
-
-  //   if (countryFilterChanged || prevOrderByDirection) {//if the country filter changed, reset the state and set page to 1
-  //     setPage(1)
-
-  //     nextPage = 1
-  //     prevCountryFilter.current = countryFilter
-  //     prevOrderByFilter.current = orderBy
-  //   }
-
-  //   dispatch(getStocksAsync({ countryFilter: countryFilter.countryCode, orderBy, page: nextPage }))
-  // }, [page, countryFilter, JSON.stringify(orderBy)])
-
   useEffect(() => {
     dispatch(reset())
 
