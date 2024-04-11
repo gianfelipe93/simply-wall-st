@@ -10,8 +10,8 @@ import {
   Legend,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
-
-const LABELS = ['VALUE', 'DIVIDEND', 'INCOME', 'PAST', 'FUTURE'];
+import { useTranslation } from 'react-i18next';
+import { VALUE, DIVIDEND, INCOME, PAST, FUTURE, HEALTH } from "../util/constants";
 
 const colorGradient = [
   [255, 0, 0],
@@ -46,6 +46,9 @@ type ChartData = {
 }
 
 const Chart = (props: ChartProps) => {
+  const { t } = useTranslation()
+  const LABELS = [t(VALUE), t(DIVIDEND), t(INCOME), t(PAST), t(FUTURE), t(HEALTH)];
+
   const [chartData, setChartData] = useState<ChartData>()
   const { score } = props
 
@@ -61,6 +64,7 @@ const Chart = (props: ChartProps) => {
           backgroundColor: getChartColor(scoreAvg, true),
           borderColor: getChartColor(scoreAvg),
           borderWidth: 1,
+          justifyContent: 'center',
           width: '100%',
           elements: {
             line: {
@@ -128,13 +132,24 @@ const Chart = (props: ChartProps) => {
           display: false
         },
         suggestedMin: 1,
-        suggestedMax: 5,
+        suggestedMax: 6,
+        grid: {
+          color: 'black'
+        },
+        ticks: {
+          display: false,
+          maxTicksLimit: 7
+        },
+        pointLabels: {
+          color: 'white',
+          fontWeight: 'bold'
+        }
       }
     }
   };
 
   return (
-    <div>
+    <div className='d-flex'>
       {chartData && <Radar data={chartData} options={options} />}
     </div>
   )

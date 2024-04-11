@@ -2,7 +2,6 @@ import React from 'react'
 import Stock from '../types/Stock'
 import Chart from './Chart'
 import StyledTile from './styles/StyledTile.style'
-import Skeleton from 'react-loading-skeleton'
 
 type TileProps = {
   stock: Stock

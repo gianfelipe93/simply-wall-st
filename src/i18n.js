@@ -1,20 +1,32 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import { FILTER_BY_COUNTRY, ORDER_BY } from "./util/constants";
+import { FILTER_BY_COUNTRY, ORDER_BY, VALUE, DIVIDEND, INCOME, PAST, FUTURE, SELECT_LANGUAGE, HEALTH } from "./util/constants";
 
 const resources = {
   en: {
     translation: {
-      FILTER_BY_COUNTRY: "Filter by country",
-      ORDER_BY: "Order by",
-      SELECT_LANGUAGE: "Select language",
+      [FILTER_BY_COUNTRY]: "Filter by country",
+      [ORDER_BY]: "Order by",
+      [SELECT_LANGUAGE]: "Select language",
+      [VALUE]: "Value",
+      [DIVIDEND]: "Dividend",
+      [INCOME]: "Income",
+      [PAST]: "Past",
+      [FUTURE]: "Future",
+      [HEALTH]: "Health",
     }
   },
   br: {
     translation: {
-      FILTER_BY_COUNTRY: "Filtrar por país",
-      ORDER_BY: "Ordenar por",
-      SELECT_LANGUAGE: "Selecione o idioma",
+      [FILTER_BY_COUNTRY]: "Filtrar por país",
+      [ORDER_BY]: "Ordenar por",
+      [SELECT_LANGUAGE]: "Selecione o idioma",
+      [VALUE]: "Valor",
+      [DIVIDEND]: "Dividendo",
+      [INCOME]: "Receita",
+      [PAST]: "Passado",
+      [FUTURE]: "Futuro",
+      [HEALTH]: "Saúde",
     }
   }
 };
