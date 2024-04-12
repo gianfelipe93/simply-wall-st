@@ -29,17 +29,24 @@ I have created a simple page that lists stocks by country and allows ascending a
   - Stock
 
 
+## If this was a feature on a real product
+
+- I would have used environment variables. For example, the SWS URL API and Header.
+- I would have handled API errors. Currently it will simply show an empty list whereas in a read product I would show a user friendly message/image.
+- I would have invested more time on making it look better on smaller screens:
+  - The tile has inconsistent height on smaller screen because the sentence might be too large, which breaks the line, making those tiles a bit longer than tiles with short sentences.
+  - The filters could look better on smaller screens as well.
+- I would have invested more time into testing. I have written front-end tests with Jest in the past but I have not had a lot of exposure to it. If this was going to be published on the live website, I would make sure I write tests.
+
 ## See instructions below to run the app:
 
 Or you can access it here: 
 
 In the project directory, you can run:
 
+### `npm install`
+and then
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.

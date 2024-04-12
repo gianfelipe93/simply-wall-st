@@ -1,7 +1,7 @@
 import React from 'react'
 import OrderBy from '../types/OrderBy';
 import Country from '../types/Country';
-import { Autocomplete, Button, TextField } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import { COUNTRY_LIST, FILTER_BY_COUNTRY, ORDER_BY, ORDER_BY_LIST, SELECT_LANGUAGE, SUPPORTED_LANGUAGES } from '../util/constants';
 import StyledFilter from './styles/StyledFilter.style';
 import { useTranslation } from 'react-i18next';
