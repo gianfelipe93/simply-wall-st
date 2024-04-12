@@ -18,7 +18,7 @@ I have created a simple page that lists stocks by country and allows ascending a
     - Select language dropdown: Allows user to change the app language. I used i18n to setup basic translation, when you change the country in that dropdown it will change the placeholder for the dropdowns above. Example: Filter by country -> Filtrar por país. It is a small change but shows that I set it up and understood the concept.
     - Tile: The tile component will show stock information like name, unique code and snowflake chart
     - Chart: Renders the snowflake chart. I created an average score value and used it to show stocks that go from light/shiny green if score is 6 all the way down to blood red if the score is 0. (this one was nice to implement)
-- State management: I setup Redux as state management tool. It is one of the most famous state management frameworks and it makes the data flow easily throw the application.
+- State management: I setup Redux as state management tool. It is one of the most famous state management frameworks and it makes the data flow easily throughout the application.
 - Types:
   - Country
   - Grid
